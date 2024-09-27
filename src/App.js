@@ -8,17 +8,16 @@ const DATA = [
     name: "Advisor",
     items: [
       { id: "26fd50b3-3841-496e-8b32-73636f6f4197", name: "Habibur Rahman" },
-      { id: "b0ee9d50-d0a6-46f8-96e3-7f3f0f9a2525", name: "Najmul" },
+      { id: "b0ee9d50-d0a6-46f8-96e3-7f3f0f9a2525", name: "Najmul Hossain" },
     ],
     tint: 1,
   },
   {
     id: "Teacher-487f68b4-1746-438c-920e-d67b7df46247",
-    name: "Teacher",
+    name: "CSE",
     items: [
       {
-        id: "95ee6a5d-f927-4579-8c15-2b4eb86210ae",
-        name: "Prof. Azim",
+        id: "95ee6a5d-f927-4579-8c15-2b4eb86210ae", name: "Prof. Azim",
       },
       { id: "5bee94eb-6bde-4411-b438-1c37fa6af364", name: "Ashraf Kazi" },
     ],
@@ -26,21 +25,22 @@ const DATA = [
   },
   {
     id: "IT-25daffdc-aae0-4d73-bd31-43f73101e7c0",
-    name: "IT",
+    name: "EEE",
     items: [
       { id: "960cbbcf-89a0-4d79-aa8e-56abbc15eacc", name: "Abu Bakar" },
-      { id: "d3edf796-6449-4931-a777-ff66965a025b", name: "Belal" },
+      { id: "d3edf796-6449-4931-a777-ff66965a025b", name: "Md. Belal " },
     ],
     tint: 3,
   },
 ];
+// const newItem = { id: "n983483cf-89a0-4d79-aa8e-56abbc15eacc", name: "New guy" }
 
 function App() {
   const [stores, setStores] = useState(DATA);
 
   const handleDragAndDrop = (results) => {
     const { source, destination, type } = results;
-console.log(results)
+    console.log(results)
     if (!destination) return;
 
     if (
@@ -90,22 +90,25 @@ console.log(results)
       items: newDestinationItems,
     };
 
-    console.log("old store:",stores);
-    console.log("new store:",newStores);
+    console.log("old store:", stores);
+    console.log("new store:", newStores);
+    // adding a new item
+    // newStores.map(store => store.name==='IT'?store.items.push(newItem):'')
     setStores(newStores);
-    
+
   };
 
   return (
     <div className="layout__wrapper">
       <div className="card">
+        
         <DragDropContext onDragEnd={handleDragAndDrop}>
           <div className="header">
-            <h1>Shopping List</h1>
+            <h1>Teachers' List</h1>
           </div>
           <Droppable droppableId="ROOT" type="group">
             {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
+              <div className="teachers" {...provided.droppableProps} ref={provided.innerRef}>
                 {stores.map((store, index) => (
                   <Draggable
                     draggableId={store.id}
@@ -129,6 +132,11 @@ console.log(results)
           </Droppable>
         </DragDropContext>
       </div>
+
+     <div className="low-text">
+     <h2 >Drag n Drop</h2>
+     <p>Enjoy dragging anything, anywhere on the top</p>
+     </div>
     </div>
   );
 }
